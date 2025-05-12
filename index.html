@@ -1,0 +1,130 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>E2E Test Dapp</title>
+  <link rel="icon" type="image/png" href="metamask-fox.svg">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="metamask.css" type="text/css">
+</head>
+
+<body>
+  <main class="container-fluid">
+    <header>
+      <h1 class="text-center">E2E Test Dapp</h1>
+    </header>
+
+    <!-- Part 1 Setting up Basic Actions and Status-->
+    <section>
+      <h3 class="card-title">Status</h3>
+      <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-primary">Network: <span id="network"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-secondary">ChainId: <span id="chainId"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-success">Accounts: <span id="accounts"></span></p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <img class="card-img-top" src="https://metamask.github.io/metamask-docs/ethereum-metamask-chrome.png"
+              alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Basic Actions</h4>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="band">绑定推荐地址</button>
+              推荐地址：<input class="nfo-text" id="parentAddress">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="mintProduct">客户铸造</button>
+              数量(测试数量0.0001-0.0005)：<input class="nfo-text" id="mintAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="burnProduct">销毁</button>
+              销毁数量：<input class="nfo-text" id="burnAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="divieBnb">领取个人bnb</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="sendTransaction">购买</button>
+              购买额度：<input class="nfo-text" id="sendAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="sendTokenTransaction">卖出</button>
+              卖出额度：<input class="nfo-text" id="sendTokenAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="testBuy">dex购买</button>
+              购买额度：<input class="nfo-text" id="sendUsdtAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="testSell">dex卖出</button>
+              卖出<input class="nfo-text" id="dexTokenAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="distributeDividends">触发分币</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_1">开始募集阶段</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_2">募集完成阶段</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_6">加池后修改交易对</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_3">白名单交易阶段</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_4">超级白名单阶段</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam_5">开放交易阶段</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam2_1">关闭价格验证</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="updateParam2_2">开启价格验证</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="connectButton" disabled></button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getAccounts">eth_accounts</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_addEthereumChain">为钱包添加网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_switchEthereumChain">请求钱包切换网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_requestPermissions">请求连接钱包</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_getPermissions">获取(列出)权限</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="eth_accounts">获取地址</button>
+              <p class="info-text alert alert-secondary">eth_accounts result: <span id="getAccountsResult"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Part 1 -->
+  </main>
+
+  <script src="node_modules/@metamask/onboarding/dist/metamask-onboarding.bundle.js" defer></script>
+  <script src="node_modules/web3/dist/web3.min.js" defer></script>
+  <script src="node_modules/@metamask/legacy-web3/dist/metamask.web3.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="routerAbi.js" defer></script>
+  <script src="clsAbi.js" defer></script>
+  <script src="mbhAbi.js" defer></script>
+  <script src="contract.js" defer></script>
+  
+</body>
+
+</html>
