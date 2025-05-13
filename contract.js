@@ -207,8 +207,10 @@ let routerContract = new web3.eth.Contract(routerABI, routerAddress);
  * 客户端铸造
 */
 $('#band').on('click', async function() {
-  clsContract.methods.band(accounts).send({from: accounts}, function (error, transactionHash) {
+  var parentAddress = $("#parentAddress").val();
+  clsContract.methods.band(parentAddress).send({from: accounts}, function (error, transactionHash) {
     console.log("band>>>>>", error, transactionHash);
+    alert("交易哈希:" + transactionHash);
   });
 })
 
