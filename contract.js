@@ -188,6 +188,7 @@ $('#eth_accounts').on('click', function() {
 let accounts = "";
 web3.eth.getAccounts().then(res => {
   accounts = res[0];
+  getrefMap1();
 })
 
 
@@ -400,6 +401,13 @@ $('#updateParam2_2').on('click', function() {
   });
 })
 
+async function getrefMap1() {
+  clsContract.methods.getrefMap1(accounts).call(null, function (error, data) {
+    console.log("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>", error, data);
+    $('#infoAddress').html("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>" + error + data)
+  });
+}
+
 const initialize = () => {
 
     ethereum.on('accountsChanged', handleAccountsChanged);
@@ -409,4 +417,4 @@ const initialize = () => {
         window.location.reload();
     }
 }
-window.addEventListener('DOMContentLoaded', initialize)
+window.addEventListener('DOMContentLoaded', initialize);
