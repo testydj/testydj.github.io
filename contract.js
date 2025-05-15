@@ -334,10 +334,20 @@ $('#testSell').on('click', async function() {
 $('#distributeDividends').on('click', function() {
   console.log('>>>','distributeDividends');
   clsContract.methods.distributeDividends().send({from: accounts}, function (error, transactionHash) {
-    console.log("divieBnb>>>>>", error, transactionHash);
+    console.log("distributeDividends>>>>>", error, transactionHash);
   });
 
 })
+
+//触发节点分币
+$('#distributeNode').on('click', function() {
+  console.log('>>>','distributeNode');
+  clsContract.methods.distributeNode().send({from: accounts}, function (error, transactionHash) {
+    console.log("distributeNode>>>>>", error, transactionHash);
+  });
+
+})
+
 
 //开始募集
 $('#updateParam_1').on('click', function() {

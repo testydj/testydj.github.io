@@ -674,6 +674,13 @@ clsABI = [
   },
   {
     "inputs": [],
+    "name": "distributeNode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "dividAmount",
     "outputs": [
       {
