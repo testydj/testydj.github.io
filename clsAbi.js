@@ -124,6 +124,25 @@ clsABI = [
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "_buyBnbAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "_totalSupply",
     "outputs": [
@@ -725,6 +744,19 @@ clsABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "divieNft",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint32",
@@ -841,6 +873,11 @@ clsABI = [
     "inputs": [],
     "name": "getStatData",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "",
@@ -1407,6 +1444,19 @@ clsABI = [
   },
   {
     "inputs": [],
+    "name": "profitTokenAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "queueCursor",
     "outputs": [
       {
@@ -1859,6 +1909,25 @@ clsABI = [
       }
     ],
     "name": "waitGetBurnBnb",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "waitGetNftS",
     "outputs": [
       {
         "internalType": "uint256",
