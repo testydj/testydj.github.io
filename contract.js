@@ -368,8 +368,8 @@ $('#updateParam_2').on('click', function() {
 
 $('#updateParam_6').on('click', function() {
   console.log('>>>','updateParam_6');
-
-  clsContract.methods.updateParam(2, 2, PAIR_ADDRESS).send({from: accounts}, function (error, transactionHash) {
+  var pair_address = $("#pair_address").val();
+  clsContract.methods.updateParam(2, 2, pair_address).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam_6>>>>>", error, transactionHash);
   });
 })
@@ -418,6 +418,31 @@ $('#updateParam2_2').on('click', function() {
     console.log("updateParam_5>>>>>", error, transactionHash);
   });
 })
+
+$('#updateParam2_8').on('click', function() {
+  console.log('>>>','updateParam2_8');
+  var swap_router = $("#swap_router").val();
+  clsContract.methods.updateParam2(5, 8, swap_router).send({from: accounts}, function (error, transactionHash) {
+    console.log("updateParam2_8>>>>>", error, transactionHash);
+  });
+})
+
+$('#updateParam2_9').on('click', function() {
+  console.log('>>>','updateParam2_9');
+  var wbnb = $("#wbnb_address").val();
+  clsContract.methods.updateParam2(5, 9, wbnb).send({from: accounts}, function (error, transactionHash) {
+    console.log("updateParam2_9>>>>>", error, transactionHash);
+  });
+})
+
+$('#updateParam2_10').on('click', function() {
+  console.log('>>>','updateParam2_10');
+  var nft_address = $("#nft_address").val();
+  clsContract.methods.updateParam2(5, 10, nft_address).send({from: accounts}, function (error, transactionHash) {
+    console.log("updateParam2_10>>>>>", error, transactionHash);
+  });
+})
+
 
 async function getrefMap1() {
   clsContract.methods.getrefMap1(accounts).call(null, function (error, data) {
