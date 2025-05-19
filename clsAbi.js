@@ -423,6 +423,25 @@ clsABI = [
         "type": "address"
       }
     ],
+    "name": "burnAmountBnb",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "burnAmountR",
     "outputs": [
       {
@@ -777,6 +796,19 @@ clsABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "feeAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -948,16 +980,6 @@ clsABI = [
     "inputs": [],
     "name": "getStatData2",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
       {
         "internalType": "uint256",
         "name": "",
@@ -1164,9 +1186,9 @@ clsABI = [
     "name": "getrefMap2",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "address payable",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -1540,6 +1562,30 @@ clsABI = [
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "refAddresses",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",

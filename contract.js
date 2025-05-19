@@ -193,7 +193,7 @@ web3.eth.getAccounts().then(res => {
 
 
 
-var clsContractAddress = "0x1Bf6e73Bb2D368cdFA3175532e8Ec2577a3a274c";
+var clsContractAddress = "0x109C7A96b3DbC99Be0fBcF2E7B6dE0cFdA3d2942";
 var usdtContractAddress = "0x48afC9801eB27281C3a9d35f34cF15E8533bb87e";
 var routerAddress = "0xCc7aDc94F3D80127849D2b41b6439b7CF1eB4Ae0";
 
@@ -451,6 +451,11 @@ async function getrefMap1() {
     console.log("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>", error, data);
     $('#infoAddress').html("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>" + error + data)
   });
+
+    //推荐地址列表
+  // clsContract.methods.refAddresses(accounts).call(null, function (error, data) {
+  //   console.log('>>>', data);
+  // });
 }
 
 async function getrefMap() {
@@ -483,7 +488,17 @@ async function getStatData2() {
   });
 }
 
-//永久销毁，燃烧次数， 燃烧地址数，
+//获取价格
+async function getAmountOut() {
+  console.log('>>>','getAmountOut');
+  var amountOut = $("#amountOut").val();
+  var isBuy = true; // 买-true,卖false
+  clsContract.methods.getAmountOut(amountOut, isBuy).call(null, function (error, data) {
+    console.log("错误信息，价格 >>>>>", error, data);
+  });
+}
+
+
 
 const initialize = () => {
 
