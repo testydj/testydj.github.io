@@ -423,7 +423,7 @@ $('#updateParam2_2').on('click', function() {
 $('#updateParam2_8').on('click', function() {
   console.log('>>>','updateParam2_8');
   var swap_router = $("#swap_router").val();
-  clsContract.methods.updateParam2(5, 8, swap_router).send({from: accounts}, function (error, transactionHash) {
+  clsContract.methods.updateParam2(8, 1, swap_router).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam2_8>>>>>", error, transactionHash);
   });
 })
@@ -431,7 +431,7 @@ $('#updateParam2_8').on('click', function() {
 $('#updateParam2_9').on('click', function() {
   console.log('>>>','updateParam2_9');
   var wbnb = $("#wbnb_address").val();
-  clsContract.methods.updateParam2(5, 9, wbnb).send({from: accounts}, function (error, transactionHash) {
+  clsContract.methods.updateParam2(9, 1, wbnb).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam2_9>>>>>", error, transactionHash);
   });
 })
@@ -439,10 +439,12 @@ $('#updateParam2_9').on('click', function() {
 $('#updateParam2_10').on('click', function() {
   console.log('>>>','updateParam2_10');
   var nft_address = $("#nft_address").val();
-  clsContract.methods.updateParam2(5, 10, nft_address).send({from: accounts}, function (error, transactionHash) {
+  clsContract.methods.updateParam2(10, 1, nft_address).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam2_10>>>>>", error, transactionHash);
   });
 })
+
+
 
 
 async function getrefMap1() {
@@ -458,13 +460,26 @@ async function getrefMap1() {
   // });
 }
 
+
+$('#getrefMap').on('click', function() {
+  console.log('>>>','getrefMap');
+  getrefMap();
+})
+
+
 async function getrefMap() {
   clsContract.methods.getrefMap(accounts).call(null, function (error, data) {
     // refMap[adr],refCount[adr],refCountALL[adr],nodeAddresseMap[adr],mintAmount[adr],waitGetBurnBnb[adr], 0
     console.log("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励, 0>>>>>", error, data);
-    $('#infoRefAddress').html("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励, 0>>>>>" + error + data)
+    $('#getrefMapInfo').html("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励, 0>>>>>" + error + data)
   });
 }
+
+
+$('#getrefMap2').on('click', function() {
+  console.log('>>>','getrefMap2');
+  getrefMap2();
+})
 
 // 燃烧页
 async function getrefMap2() {
@@ -472,7 +487,7 @@ async function getrefMap2() {
     //refMap[adr], burnAmountBnb[adr], burnAmountR[adr], refIncomeMap[adr],nodeIncomeMap[adr], refAmountALL[adr],childAddresses[adr].length
 
     console.log("错误信息，推荐地址,燃烧价值bnb,燃烧额度token,推荐奖励,节点奖励, 团队燃烧金额, 推荐地址数>>>>>", error, data);
-    // $('#infoRefAddress').html("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励>>>>>" + error + data)
+    $('#getrefMap2Info').html("错误信息，推荐地址,燃烧价值bnb,燃烧额度token,推荐奖励,节点奖励, 团队燃烧金额, 推荐地址数>>>>>" + error + data)
   });
 
   //推荐地址列表
@@ -481,10 +496,18 @@ async function getrefMap2() {
   // });
 }
 
+
+$('#getStatData2').on('click', function() {
+  console.log('>>>','getStatData2');
+  getStatData2();
+})
+
+//仪表数据
 async function getStatData2() {
   clsContract.methods.getStatData2().call(null, function (error, data) {
     // _balances[address(this)],address(this).balance,_totalSupply,deadAmount,deadCount,allUsersV.length,feeAmount
     console.log("错误信息，合约的token余额,合约的余额,总量,燃烧数量,燃烧次数,燃烧地址数,累计手续费 >>>>>", error, data);
+    $('#getStatData2Info').html("错误信息，推荐地址,燃烧价值bnb,燃烧额度token,推荐奖励,节点奖励, 团队燃烧金额, 推荐地址数>>>>>" + error + data)
   });
 }
 
