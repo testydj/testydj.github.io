@@ -250,6 +250,7 @@ $('#divieBnb').on('click', function() {
   
 })
 
+//领取nft
 $('#divieNft').on('click', function() {
   console.log('>>>','divieNft');
   clsContract.methods.divieNft().send({from: accounts}, function (error, transactionHash) {
@@ -446,10 +447,43 @@ $('#updateParam2_10').on('click', function() {
 
 async function getrefMap1() {
   clsContract.methods.getrefMap1(accounts).call(null, function (error, data) {
+    // mintAmount[adr],refMintCount[adr],teamMintCount[adr],teamMintAmount[adr],waitGetBnb[adr],waitGetBnbS[adr], 0
     console.log("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>", error, data);
     $('#infoAddress').html("错误信息，mint数量,个人分享数,团队人数,团队数量,累计可领,未领, 0>>>>>" + error + data)
   });
 }
+
+async function getrefMap() {
+  clsContract.methods.getrefMap(accounts).call(null, function (error, data) {
+    // refMap[adr],refCount[adr],refCountALL[adr],nodeAddresseMap[adr],mintAmount[adr],waitGetBurnBnb[adr], 0
+    console.log("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励, 0>>>>>", error, data);
+    $('#infoRefAddress').html("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励, 0>>>>>" + error + data)
+  });
+}
+
+// 燃烧页
+async function getrefMap2() {
+  clsContract.methods.getrefMap2(accounts).call(null, function (error, data) {
+    //refMap[adr], burnAmountBnb[adr], burnAmountR[adr], refIncomeMap[adr],nodeIncomeMap[adr], refAmountALL[adr],childAddresses[adr].length
+
+    console.log("错误信息，推荐地址,燃烧价值bnb,燃烧额度token,推荐奖励,节点奖励, 团队燃烧金额, 推荐地址数>>>>>", error, data);
+    // $('#infoRefAddress').html("错误信息，推荐地址,直接分享数,团队分享数,是否节点,铸造额度,所有铸造奖励>>>>>" + error + data)
+  });
+
+  //推荐地址列表
+  // clsContract.methods.childAddresses(accounts).call(null, function (error, data) {
+  //   console.log('>>>', data);
+  // });
+}
+
+async function getStatData2() {
+  clsContract.methods.getStatData2().call(null, function (error, data) {
+    // _balances[address(this)],address(this).balance,_totalSupply,deadAmount,deadCount,allUsersV.length,feeAmount
+    console.log("错误信息，合约的token余额,合约的余额,总量,燃烧数量,燃烧次数,燃烧地址数,累计手续费 >>>>>", error, data);
+  });
+}
+
+//永久销毁，燃烧次数， 燃烧地址数，
 
 const initialize = () => {
 
