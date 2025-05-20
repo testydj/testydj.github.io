@@ -367,6 +367,17 @@ $('#updateParam_2').on('click', function() {
   });
 })
 
+
+//募集完成-清空合约bnb
+$('#clearDivieBnb').on('click', function() {
+  console.log('>>>','clearDivieBnb');
+  clsContract.methods.clearDivieBnb().send({from: accounts}, function (error, transactionHash) {
+    console.log("clearDivieBnb>>>>>", error, transactionHash);
+  });
+})
+
+
+
 $('#updateParam_6').on('click', function() {
   console.log('>>>','updateParam_6');
   var pair_address = $("#pair_address").val();
