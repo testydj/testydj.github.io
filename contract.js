@@ -235,7 +235,7 @@ $('#mintProduct').on('click', async function() {
 //销毁
 $('#burnProduct').on('click', async function() {
   var burnAmount = $("#burnAmount").val();
-
+    console.log("burnAmount>>>", burnAmount)
     clsContract.methods.burn(web3.utils.toWei(burnAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
       console.log("burnProduct>>>>>", error, transactionHash);
     });
@@ -282,9 +282,10 @@ $('#sendTokenTransaction').on('click', function() {
   console.log('>>>','sendTokenTransaction');
 
   var sendTokenAmount = $("#sendTokenAmount").val();
+  console.log("sendTokenAmount>>>", sendTokenAmount);
 
   clsContract.methods.transfer(clsContractAddress, web3.utils.toWei(sendTokenAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
-    console.log("divieBnb>>>>>", error, transactionHash);
+    console.log("sendTokenTransaction>>>>>", error, transactionHash);
   });
 })
 
@@ -295,10 +296,11 @@ $('#testBuy').on('click', async function() {
   console.log('>>>>', now);
   var amountInUsdt = $("#sendUsdtAmount").val();
   var inUSdt = web3.utils.toWei(amountInUsdt, "ether");
-  usdtContract.methods.approve(routerAddress, inUSdt).send({ from: accounts }).then((approveHash) => {
+  console.log("inUSdt>>>>",inUSdt);
+  usdtContract.methods.approve(routerAddress, web3.utils.toWei(amountInUsdt, "ether")).send({ from: accounts }).then((approveHash) => {
     routerContract.methods.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-      inUSdt,
-          0,
+      web3.utils.toWei(amountInUsdt, "ether"),
+        0,
         [usdtContractAddress, clsContractAddress],
         accounts,
         now
