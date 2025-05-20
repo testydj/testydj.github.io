@@ -193,7 +193,7 @@ web3.eth.getAccounts().then(res => {
 
 
 
-var clsContractAddress = "0x109C7A96b3DbC99Be0fBcF2E7B6dE0cFdA3d2942";
+var clsContractAddress = "0x4f0C42eFFe797259422D03da2D44899aC164EDbD";
 var usdtContractAddress = "0x48afC9801eB27281C3a9d35f34cF15E8533bb87e";
 var routerAddress = "0xCc7aDc94F3D80127849D2b41b6439b7CF1eB4Ae0";
 
