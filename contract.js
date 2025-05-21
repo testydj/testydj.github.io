@@ -524,12 +524,28 @@ async function getStatData2() {
   });
 }
 
-//获取价格
+//
+async function getStatData() {
+  clsContract.methods.getStatData().call(null, function (error, data) {
+    // totalBurnCounted,dividAmountS, profitTokenAmount,dividAmount,maxBurnCountDay,totalBurnCounted,0,0,0 ,mintEnable,allUsersV.length,stayBnbMax
+    console.log("错误信息，当天销毁数,滑点数量,盈利税数量,0,最大燃烧次数,0,累计手续费 >>>>>", error, data);
+    $('#getStatData2Info').html("错误信息，推荐地址,燃烧价值bnb,燃烧额度token,推荐奖励,节点奖励, 团队燃烧金额, 推荐地址数>>>>>" + error + data)
+  });
+}
+
+//预估数量
 async function getAmountOut() {
   console.log('>>>','getAmountOut');
   var amountOut = $("#amountOut").val();
   var isBuy = true; // 买-true,卖false
   clsContract.methods.getAmountOut(amountOut, isBuy).call(null, function (error, data) {
+    console.log("错误信息，数量 >>>>>", error, data);
+  });
+}
+//获取价格
+async function getReserves() {
+  console.log('>>>','getReserves');
+  clsContract.methods.getReserves().call(null, function (error, data) {
     console.log("错误信息，价格 >>>>>", error, data);
   });
 }
