@@ -550,6 +550,14 @@ async function getReserves() {
   });
 }
 
+//烯烧总价值
+async function totalWeightedBurnValue() {
+  console.log('>>>','totalWeightedBurnValue');
+  clsContract.methods.totalWeightedBurnValue().call(null, function (error, data) {
+    console.log("错误信息，燃烧总价值 >>>>>", error, data);
+  });
+}
+
 
 
 const initialize = () => {
