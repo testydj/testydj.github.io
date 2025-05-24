@@ -471,6 +471,16 @@ $('#addMintWhite').on('click', function() {
 
 
 
+ //已烧烧数量
+$('#dividAmountMap').on('click', function() {
+  console.log('>>>','dividAmountMap');
+  clsContract.methods.dividAmountMap(accounts).call(null, function (error, data) {
+    console.log("dividAmountMap>>>>>", error, data);
+    $('#dividAmountMapInfo').html("错误信息，已燃烧数量>>>>>" + error + data)
+  });
+})
+
+
 async function getrefMap1() {
   clsContract.methods.getrefMap1(accounts).call(null, function (error, data) {
     // mintAmount[adr],refMintCount[adr],teamMintCount[adr],teamMintAmount[adr],waitGetBnb[adr],waitGetBnbS[adr], 0
