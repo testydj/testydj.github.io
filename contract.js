@@ -457,6 +457,17 @@ $('#updateParam2_10').on('click', function() {
   });
 })
 
+//添加超级白名单
+$('#addMintWhite').on('click', function() {
+  console.log('>>>','addMintWhite');
+  //type 0--超级白名单，2--白名单
+  var white_type = $("#white_type").val();
+  var addMintWhiteAddress = $("#addMintWhiteAddress").val();
+  var result = $("#result").val();
+  clsContract.methods.addMintWhite(white_type, addMintWhiteAddress, result).send({from: accounts}, function (error, transactionHash) {
+    console.log("addMintWhite>>>>>", error, transactionHash);
+  });
+})
 
 
 
@@ -557,6 +568,8 @@ async function totalWeightedBurnValue() {
     console.log("错误信息，燃烧总价值 >>>>>", error, data);
   });
 }
+
+
 
 
 
