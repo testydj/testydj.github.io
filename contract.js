@@ -363,8 +363,8 @@ $('#updateParam_1').on('click', function() {
 //募集完成
 $('#updateParam_2').on('click', function() {
   console.log('>>>','updateParam_2');
-
-  clsContract.methods.updateParam(3, 2, BURN_ADDRESS).send({from: accounts}, function (error, transactionHash) {
+  var recipient_address = $("#recipient_address").val();
+  clsContract.methods.updateParam(3, 2, recipient_address).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam_2>>>>>", error, transactionHash);
   });
 })
@@ -390,7 +390,7 @@ $('#updateParam_6').on('click', function() {
 
 //白名单交易
 $('#updateParam_3').on('click', function() {
-  console.log('>>>','updateParam_2');
+  console.log('>>>','updateParam_3');
 
   clsContract.methods.updateParam(3, 3, PAIR_ADDRESS).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam_3>>>>>", error, transactionHash);
@@ -454,6 +454,25 @@ $('#updateParam2_10').on('click', function() {
   var nft_address = $("#nft_address").val();
   clsContract.methods.updateParam2(10, 1, nft_address).send({from: accounts}, function (error, transactionHash) {
     console.log("updateParam2_10>>>>>", error, transactionHash);
+  });
+})
+
+//收尾11
+$('#updateParam2_11').on('click', function() {
+  console.log('>>>','updateParam2_11');
+  var deadAmount = $("#deadAmount").val();
+  clsContract.methods.updateParam2(11, web3.utils.toWei(deadAmount, "ether"), accounts).send({from: accounts}, function (error, transactionHash) {
+    console.log("updateParam2_11>>>>>", error, transactionHash);
+  });
+})
+
+
+//收尾12
+$('#updateParam2_12').on('click', function() {
+  console.log('>>>','updateParam2_12');
+  var totalSupplyKc = $("#totalSupplyKc").val();
+  clsContract.methods.updateParam2(12, web3.utils.toWei(totalSupplyKc, "ether"), accounts).send({from: accounts}, function (error, transactionHash) {
+    console.log("updateParam2_11>>>>>", error, transactionHash);
   });
 })
 
