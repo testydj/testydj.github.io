@@ -290,33 +290,52 @@ $('#sendTokenTransaction').on('click', function() {
 })
 
 
-
+//dex(swap)买
 $('#testBuy').on('click', async function() {
   const now = Math.floor(Date.now() / 1000) + 60;
   console.log('>>>>', now);
   var amountInUsdt = $("#sendUsdtAmount").val();
   var inUSdt = web3.utils.toWei(amountInUsdt, "ether");
-  console.log("inUSdt>>>>",inUSdt);
-  usdtContract.methods.approve(routerAddress, web3.utils.toWei(amountInUsdt, "ether")).send({ from: accounts }).then((approveHash) => {
+  usdtContract.methods.approve(routerAddress, inUSdt).send({ from: accounts }).then((approveHash) => {
+    //swapExactETHForTokensSupportingFeeOnTransferTokens
+    //swapExactTokensForTokensSupportingFeeOnTransferTokens
+    //token-token币对(例如usdt-token)
     routerContract.methods.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-      web3.utils.toWei(amountInUsdt, "ether"),
-        0,
+      inUSdt,
+          0,
         [usdtContractAddress, clsContractAddress],
         accounts,
         now
       ).send({ from: accounts }, function (error, transactionHash) {
         console.log("testBuy>>>>>", error, transactionHash);
     });
-  })
+
+    //evm本链基础币交易(例eth,bnb)
+    // routerContract.methods.swapExactETHForTokensSupportingFeeOnTransferTokens(
+    //         0,
+    //         [WBNB_TOKEN, Token.address],
+    //         wallet.address,
+    //         now,
+    //         {
+    //           web3.utils.toWei(amountInUsdt, "ether"),
+    //           // gasLimit: 400000,
+    //           // gasPrice: ethers.utils.parseUnits("5", "gwei"),
+    //         }
+    //       ).send({ from: accounts }, function (error, transactionHash) {
+    //     console.log("testBuy>>>>>", error, transactionHash);
+    // });
+    })
 
 })
 
 
-
+//dex(swap)卖
 $('#testSell').on('click', async function() {
   const now = Math.floor(Date.now() / 1000) + 60;
   var dexTokenAmount = $("#dexTokenAmount").val();
   clsContract.methods.approve(routerAddress, web3.utils.toWei(dexTokenAmount, "ether")).send({ from: accounts }).then((approveHash) => {
+    //swapExactTokensForETHSupportingFeeOnTransferTokens
+    //swapExactTokensForTokensSupportingFeeOnTransferTokens
     routerContract.methods.swapExactTokensForTokensSupportingFeeOnTransferTokens(
       web3.utils.toWei(dexTokenAmount, "ether"),
           0,
@@ -329,6 +348,25 @@ $('#testSell').on('click', async function() {
             console.log("交易成功，交易哈希：", transactionHash.hash);
         }
     });
+
+    //evm本链基础币交易(例eth,bnb)
+    // routerContract.methods.swapExactTokensForETHSupportingFeeOnTransferTokens(
+    // web3.utils.toWei(dexTokenAmount, "ether"),
+    // 0,
+    // [clsContractAddress, usdtContractAddress],
+    // owner.address,
+    // deadline,
+    // {
+    //     gasLimit: 400000,
+    //     gasPrice: ethers.utils.parseUnits("5", "gwei"),
+    // }
+    // ).send({ from: accounts }, function (error, transactionHash) {
+    //     console.log("release>>>>>", error, transactionHash);
+    //     if (!error) {
+    //         console.log("交易成功，交易哈希：", transactionHash.hash);
+    //     }
+    // });
+
   })
 
 })
