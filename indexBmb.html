@@ -1,0 +1,174 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>E2E Test Dapp</title>
+  <link rel="icon" type="image/png" href="metamask-fox.svg">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="metamask.css" type="text/css">
+</head>
+
+<body>
+  <main class="container-fluid">
+    <header>
+      <h1 class="text-center">E2E Test Dapp</h1>
+    </header>
+
+    <!-- Part 1 Setting up Basic Actions and Status-->
+    <section>
+      <h3 class="card-title">Status</h3>
+      <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-primary">Network: <span id="network"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-secondary">ChainId: <span id="chainId"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-success">Accounts: <span id="accounts"></span></p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <img class="card-img-top" src="https://metamask.github.io/metamask-docs/ethereum-metamask-chrome.png"
+              alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Basic Actions</h4>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">总奖池数</button>
+              <p class="info-text alert alert-success">总奖池数: <span id="totalReward"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">总奖池剩余数</button>
+              <p class="info-text alert alert-success">总奖池剩余数: <span id="balanceOf"></span></p>
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3">质押总数</button>
+              <p class="info-text alert alert-success">质押总数: <span id="totalStaked"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">当前天数</button>
+              <p class="info-text alert alert-success">当前天数: <span id="getCurrentDay"></span></p>
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3">拉新沉淀池</button>
+              <p class="info-text alert alert-success">拉新沉淀池: <span id="bmbDeposit"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">当前新用户数</button>
+              <p class="info-text alert alert-success">当前新用户户数: <span id="newcomerTotal"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">最大算力</button>
+              <p class="info-text alert alert-success">最大算力: <span id="power"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getData">地址数据</button>
+              <p class="info-text alert alert-success">个人地址数据: <span id="getDataInfo"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getPendingReward">地址待领取部分</button>
+              <p class="info-text alert alert-success">地址待领取部分: <span id="pendingReward"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setReferrer">绑定推荐地址</button>
+              推荐地址：<input class="nfo-text" id="referrerAddress">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="pledge">质押</button>
+              质押lp数量：<input class="nfo-text" id="pledgeAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="withdraw">取回lp</button>
+              取回lp数量：<input class="nfo-text" id="withdrawAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="claim">领取个人收益</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="distributeNewcomerReferrer">触发拉新奖励</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="withdrawRemaining">提取剩余bmb</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="withdrawRemainingLp">提取剩余lp</button>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setStartAddress">设置初始地址</button>
+              初始地址<input class="nfo-text" id="startAddress">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="startMining">配置开始</button>
+              开始时间戳<input class="nfo-text" id="startTime">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setClaimBmbFee">设置收益领取手续费</button>
+              收益领取手续费(n/10000)<input class="nfo-text" id="claimBmbFee">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setWithdrawLpFee">设置lp取回手续费</button>
+              设置lp取回手续费(n/10000)<input class="nfo-text" id="withdrawLpFee">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setPower">设置最大算力</button>
+              最大算力<input class="nfo-text" id="power">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setTotalReward">设置总奖池</button>
+              总奖池量<input class="nfo-text" id="totalReward">
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setTotalClaimDay">设置产出天数</button>
+              总天数<input class="nfo-text" id="totalClaimDay">
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setRewardPercent">设置推荐人手续费</button>
+              推荐人手续费(n/10000)<input class="nfo-text" id="rewardPercent">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setReferrerRewardPercent">设置间接推荐人手续费</button>
+              间接推荐人手续费(n/10000)<input class="nfo-text" id="referrerRewardPercent">
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setThreshold">设置门槛</button>
+              门槛<input class="nfo-text" id="threshold">
+              <hr>
+              
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="connectButton" disabled></button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getAccounts">eth_accounts</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_addEthereumChain">为钱包添加网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_switchEthereumChain">请求钱包切换网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_requestPermissions">请求连接钱包</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_getPermissions">获取(列出)权限</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="eth_accounts">获取地址</button>
+              <p class="info-text alert alert-secondary">eth_accounts result: <span id="getAccountsResult"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Part 1 -->
+  </main>
+
+  <script src="node_modules/@metamask/onboarding/dist/metamask-onboarding.bundle.js" defer></script>
+  <script src="node_modules/web3/dist/web3.min.js" defer></script>
+  <script src="node_modules/@metamask/legacy-web3/dist/metamask.web3.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="dailyBMBMiningAbi.js" defer></script>
+  <script src="bmbAbi.js" defer></script>
+  <script src="lpAbi.js" defer></script>
+  <script src="contractBmb.js" defer></script>
+  
+</body>
+
+</html>
