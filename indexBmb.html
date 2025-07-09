@@ -75,6 +75,11 @@
               <p class="info-text alert alert-success">个人地址数据: <span id="getDataInfo"></span></p>
               <hr>
 
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getUserNewcomer">个人邀请的新用户数</button>
+              <p class="info-text alert alert-success">个人邀请的新用户数: <span id="userNewcomerInfo"></span></p>
+              <hr>
+              
+
               <button class="btn btn-primary btn-lg btn-block mb-3" id="getPendingReward">地址待领取部分</button>
               <p class="info-text alert alert-success">地址待领取部分: <span id="pendingReward"></span></p>
               <hr>
@@ -160,9 +165,9 @@
     <!-- /Part 1 -->
   </main>
 
-  <script src="metamask-onboarding.bundle.js" defer></script>
-  <script src="web3.min.js" defer></script>
-  <script src="metamask.web3.min.js" defer></script>
+  <script src="node_modules/@metamask/onboarding/dist/metamask-onboarding.bundle.js" defer></script>
+  <script src="node_modules/web3/dist/web3.min.js" defer></script>
+  <script src="node_modules/@metamask/legacy-web3/dist/metamask.web3.min.js" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
   <script src="dailyBMBMiningAbi.js" defer></script>
   <script src="bmbAbi.js" defer></script>

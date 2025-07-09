@@ -203,44 +203,49 @@ let dailyBMBMiningContract = new web3.eth.Contract(dailyBMBMiningABI, dailyBMBMi
 
 
 
-
+//总奖池
   dailyBMBMiningContract.methods.totalReward().call(null, function (error, data) {
     console.log(data);
     $('#totalReward').html(web3.utils.fromWei(data, "ether"))
   });
 
+  //剩余奖励
   bmbContract.methods.balanceOf(dailyBMBMiningAddress).call(null, function (error, data) {
     console.log(data);
     $('#balanceOf').html(web3.utils.fromWei(data, "ether"))
   });
 
-
+  //总质押
   dailyBMBMiningContract.methods.totalStaked().call(null, function (error, data) {
     console.log(data);
     $('#totalStaked').html(web3.utils.fromWei(data, "ether"))
   });
   
+  //当前天数
   dailyBMBMiningContract.methods.getCurrentDay().call(null, function (error, data) {
     console.log(data);
     $('#getCurrentDay').html(data)
   });
 
+  //沉淀池数据
   dailyBMBMiningContract.methods.bmbDeposit().call(null, function (error, data) {
     console.log(data);
     $('#bmbDeposit').html(web3.utils.fromWei(data, "ether"))
   });
 
+  //拉新总数
   dailyBMBMiningContract.methods.newcomerTotal().call(null, function (error, data) {
     console.log(data);
     $('#newcomerTotal').html(data)
   });
   
-
+//最大算力
   dailyBMBMiningContract.methods.power().call(null, function (error, data) {
     console.log(data);
     $('#power').html(web3.utils.fromWei(data, "ether"))
   });
 
+  //待领取数据
 $('#getPendingReward').on('click', async function() {
   console.log(">>>>accounts", accounts)
   dailyBMBMiningContract.methods.pendingReward(accounts).call(null, function (error, data) {
@@ -249,12 +254,21 @@ $('#getPendingReward').on('click', async function() {
 
 })
 
+//个人数据
 $('#getData').on('click', async function() {
   dailyBMBMiningContract.methods.userInfo(accounts).call(null, function (error, data) {
     $('#getDataInfo').html("质押的LP数量, 未领取收益的起时天数(质押时间), 已领取, 推荐人, 是否设置推荐人, 是否达到门槛 >>>>" + web3.utils.fromWei(data.amount, "ether") + "," +  data.lastClaimDay + ","  + web3.utils.fromWei(data.rewardDebt, "ether") + ","  + data.referrer + ","  + data.hasReferred + ","  + data.hasThreshold)
   });
 
 })
+
+//个人邀请新用户数
+$('#getUserNewcomer').on('click', async function() {
+  dailyBMBMiningContract.methods.userNewcomer(accounts).call(null, function (error, data) {
+    $('#userNewcomerInfo').html(data)
+  });
+})
+
 
 
 /**
@@ -400,6 +414,7 @@ $('#setRewardPercent').on('click', function() {
   });
 })
 
+//设置间接推荐人手续费
 $('#setReferrerRewardPercent').on('click', function() {
   console.log('>>>','setReferrerRewardPercent');
   var referrerRewardPercent = $("#setReferrerRewardPercent").val();
@@ -408,6 +423,7 @@ $('#setReferrerRewardPercent').on('click', function() {
   });
 })
 
+//设置门槛
 $('#setThreshold').on('click', function() {
   console.log('>>>','setThreshold');
   var threshold = $("#threshold").val();
