@@ -657,8 +657,19 @@ $('#activeRewardsAccount').on('click', function() {
   var rewardsAccount = $("#rewardsAccount").val();
   var rewardsAmount = $("#rewardsAmount").val();
 
-  clsContract.methods.transfer(rewardsAccount, web3.utils.toWei(rewardsAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
+  lpRewardsContract.methods.activeRewardsAccount(rewardsAccount, web3.utils.toWei(rewardsAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
     console.log("rewardsAccount>>>>>", error, transactionHash);
+  });
+})
+
+//保底地址
+$('#activeAndendRewards').on('click', function() {
+  console.log('>>>','activeRewardsAccount');
+
+  var rewardAddresses = $("#rewardAddresses").val();
+
+  lpRewardsContract.methods.activeAndendRewards(rewardAddresses).send({from: accounts}, function (error, transactionHash) {
+    console.log("activeAndendRewards>>>>>", error, transactionHash);
   });
 })
 
