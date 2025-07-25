@@ -524,11 +524,19 @@ $('#addMintWhite').on('click', function() {
   //type 0--超级白名单，2--白名单
   var white_type = $("#white_type").val();
   var addMintWhiteAddress = $("#addMintWhiteAddress").val();
-  var arr = JSON.parse(addMintWhiteAddress);
-  console.log("addMintWhiteAddress>>>", addMintWhiteAddress);
+
+  var jsonStr = addMintWhiteAddress.replace(/(0x[a-fA-F0-9]{40})/g, '"$1"');
+  console.log("jsonStr>>>", jsonStr)
+
+  // 解析成数组
+  var arr = JSON.parse(jsonStr);
   console.log("arr", arr)
+
+  // var arr = JSON.parse(addMintWhiteAddress);
+  // console.log("addMintWhiteAddress>>>", addMintWhiteAddress);
+  // console.log("arr", arr)
   var result = $("#result").val();
-  clsContract.methods.addMintWhite(white_type, addMintWhiteAddress, result).send({from: accounts}, function (error, transactionHash) {
+  clsContract.methods.addMintWhite(white_type, arr, result).send({from: accounts}, function (error, transactionHash) {
     console.log("addMintWhite>>>>>", error, transactionHash);
   });
 })
@@ -671,7 +679,13 @@ $('#activeAndendRewards').on('click', function() {
 
   var rewardAddresses = $("#rewardAddresses").val();
 
-  lpRewardsContract.methods.activeAndendRewards(rewardAddresses).send({from: accounts}, function (error, transactionHash) {
+  var jsonStr = rewardAddresses.replace(/(0x[a-fA-F0-9]{40})/g, '"$1"');
+  console.log("jsonStr>>>", jsonStr)
+
+  // 解析成数组
+  var arr = JSON.parse(jsonStr);
+
+  lpRewardsContract.methods.activeAndendRewards(arr).send({from: accounts}, function (error, transactionHash) {
     console.log("activeAndendRewards>>>>>", error, transactionHash);
   });
 })
