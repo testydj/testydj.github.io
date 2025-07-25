@@ -524,6 +524,7 @@ $('#addMintWhite').on('click', function() {
   //type 0--超级白名单，2--白名单
   var white_type = $("#white_type").val();
   var addMintWhiteAddress = $("#addMintWhiteAddress").val();
+  console.log("addMintWhiteAddress>>>", addMintWhiteAddress);
   var result = $("#result").val();
   clsContract.methods.addMintWhite(white_type, addMintWhiteAddress, result).send({from: accounts}, function (error, transactionHash) {
     console.log("addMintWhite>>>>>", error, transactionHash);
