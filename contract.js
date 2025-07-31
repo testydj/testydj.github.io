@@ -197,16 +197,12 @@ var clsContractAddress = "0x4f0C42eFFe797259422D03da2D44899aC164EDbD";
 var usdtContractAddress = "0x48afC9801eB27281C3a9d35f34cF15E8533bb87e";
 var routerAddress = "0xCc7aDc94F3D80127849D2b41b6439b7CF1eB4Ae0";
 
-var lpRewardsAddress = "0x3C9eD5e12909b6a94d1755FE199a1F5DCeaE926e";
-
 var BURN_ADDRESS = '0x0000000000000000000000000000000000000000';
 var PAIR_ADDRESS = "0x1df37D887937E7Ba0FceF59309C7f58FdD94D2Ef";
 
 let usdtContract = new web3.eth.Contract(mbhABI, usdtContractAddress);
 let clsContract = new web3.eth.Contract(clsABI, clsContractAddress);
 let routerContract = new web3.eth.Contract(routerABI, routerAddress);
-
-let lpRewardsContract = new web3.eth.Contract(lpRewardsABI, lpRewardsAddress);
 
 /**
  * 客户端铸造
@@ -659,37 +655,6 @@ $('#getBlackHole').on('click', function() {
     // $('#getBlackHoleInfo').html("错误信息，黑洞数量>>>>>" + error + data)
   });
 })
-
-
-//保底
-$('#activeRewardsAccount').on('click', function() {
-  console.log('>>>','activeRewardsAccount');
-
-  var rewardsAccount = $("#rewardsAccount").val();
-  var rewardsAmount = $("#rewardsAmount").val();
-
-  lpRewardsContract.methods.activeRewardsAccount(rewardsAccount, web3.utils.toWei(rewardsAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
-    console.log("rewardsAccount>>>>>", error, transactionHash);
-  });
-})
-
-//保底地址
-$('#activeAndendRewards').on('click', function() {
-  console.log('>>>','activeRewardsAccount');
-
-  var rewardAddresses = $("#rewardAddresses").val();
-
-  var jsonStr = rewardAddresses.replace(/(0x[a-fA-F0-9]{40})/g, '"$1"');
-  console.log("jsonStr>>>", jsonStr)
-
-  // 解析成数组
-  var arr = JSON.parse(jsonStr);
-
-  lpRewardsContract.methods.activeAndendRewards(arr).send({from: accounts}, function (error, transactionHash) {
-    console.log("activeAndendRewards>>>>>", error, transactionHash);
-  });
-})
-
 
 
 const initialize = () => {
