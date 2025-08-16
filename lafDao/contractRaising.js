@@ -356,17 +356,39 @@ $('#emergencyWithdrawToken').on('click', function() {
 
 
 
-const initialize = () => {
+const initialize = async () => {
 
     ethereum.on('accountsChanged', handleAccountsChanged);
-    ethereum.on('chainChanged', handleAccountsChanged);
+    ethereum.on('chainChanged', handleChainChanged);
 
-    async function handleAccountsChanged() {
-        window.location.reload();
-        web3.eth.getAccounts().then(res => {
-          accounts = res[0];
-        })
+    await getAccounts();
+    async function handleAccountsChanged(newAccounts) {
+      console.log("账户发生变化:", newAccounts);
+      accounts = newAccounts[0] || ""; // 更新当前账户
+      window.location.reload(); // 刷新页面
+    }
 
+    async function handleChainChanged() {
+    window.location.reload(); // 链变化时刷新页面
     }
 }
+
+const getAccounts = async () => {
+    try {
+        // 使用 eth_requestAccounts 方法请求账户访问权限
+        const accountList = await window.ethereum.request({ 
+            method: 'eth_requestAccounts' 
+        });
+        
+        accounts = accountList[0]; // 获取第一个账户地址
+        console.log("当前账户:", accounts);
+        
+        // 这里可以调用其他需要账户地址的函数
+        // updateContractData();
+        
+    } catch (error) {
+        console.error("获取账户失败:", error);
+    }
+}
+
 window.addEventListener('DOMContentLoaded', initialize)
