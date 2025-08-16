@@ -363,6 +363,10 @@ const initialize = () => {
 
     async function handleAccountsChanged() {
         window.location.reload();
+        web3.eth.getAccounts().then(res => {
+          accounts = res[0];
+        })
+
     }
 }
 window.addEventListener('DOMContentLoaded', initialize)
