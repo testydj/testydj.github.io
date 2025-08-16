@@ -216,7 +216,7 @@ let participatingAmount = [100,200,300];
     $('#totalSupply').html(web3.utils.fromWei(data, "ether"))
   });
   
-
+  console.log("accounts>>>>", accounts);
   //私募额
   raisingContract.methods.participatingAccountAmount(accounts).call(null, function (error, data) {
     console.log(data);
