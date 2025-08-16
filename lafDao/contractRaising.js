@@ -305,8 +305,11 @@ $('#participatingWithInviter').on('click', function() {
     console.log('>>>','participatingWithInviter');
     var parentAddress = $("#parentAddress").val();
     var participatingWithInviterIndex = $("#participatingWithInviterIndex").val();
+    console.log("participatingWithInviterIndex>>>", participatingWithInviterIndex);
     var usdtAmount = participatingAmount[participatingWithInviterIndex];
+    console.log("usdtAmount>>>", usdtAmount);
     var inUsdt = web3.utils.toWei(usdtAmount, "ether");
+    console.log("inUsdt");
     usdtContract.methods.approve(raisingAddress, inUsdt).send({ from: accounts }).then((approveHash) => {
       raisingContract.methods.participatingWithInviter(_Index, parentAddress).send({from: accounts}, function (error, transactionHash) {
         console.log("participatingWithInviter>>>>>", error, transactionHash);
