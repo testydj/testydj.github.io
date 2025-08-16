@@ -1,0 +1,145 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>E2E Test Dapp</title>
+  <link rel="icon" type="image/png" href="metamask-fox.svg">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="metamask.css" type="text/css">
+</head>
+
+<body>
+  <main class="container-fluid">
+    <header>
+      <h1 class="text-center">E2E Test Dapp</h1>
+    </header>
+
+    <!-- Part 1 Setting up Basic Actions and Status-->
+    <section>
+      <h3 class="card-title">Status</h3>
+      <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-primary">Network: <span id="network"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-secondary">ChainId: <span id="chainId"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-success">Accounts: <span id="accounts"></span></p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <img class="card-img-top" src="https://metamask.github.io/metamask-docs/ethereum-metamask-chrome.png"
+              alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Basic Actions</h4>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">最大募集</button>
+              <p class="info-text alert alert-success">最大募集: <span id="totalSupplyMax"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">已募集数</button>
+              <p class="info-text alert alert-success">已募集数: <span id="totalSupply"></span></p>
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3">参与私募额</button>
+              <p class="info-text alert alert-success">参与私募额: <span id="participatingAccountAmount"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">代币额</button>
+              <p class="info-text alert alert-success">代币额: <span id="balanceOf"></span></p>
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3">奖励额度</button>
+              <p class="info-text alert alert-success">奖励额度: <span id="awardsToken"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">是否绑定邀请人</button>
+              <p class="info-text alert alert-success">是否绑定邀请人: <span id="isBindReferral"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">邀请人地址</button>
+              <p class="info-text alert alert-success">邀请人地址: <span id="getReferral"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">推荐人数查询</button>
+              <p class="info-text alert alert-success">推荐人数查询: <span id="getReferralCount"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">推荐列表</button>
+              <p class="info-text alert alert-success">推荐列表: <span id="getReferralsList"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">邀请人链路</button>
+              <p class="info-text alert alert-success">邀请人链路: <span id="getReferrals"></span></p>
+              <hr>
+
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setReferrer">绑定推荐地址</button>
+              邀请人地址：<input class="nfo-text" id="referrerAddress">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="participating">参与</button>
+              参与(0--100,1--200,2--300)：<input class="nfo-text" id="participatingIndex">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="participatingWithInviter">绑定地址直接参与</button>
+              邀请人地址：<input class="nfo-text" id="parentAddress">
+              参与(0--100,1--200,2--300)：<input class="nfo-text" id="participatingWithInviterIndex">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="divieToken">领取代币</button>
+              <hr>
+
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="emergencyWithdrawUsdt">提取剩余usdt</button>
+              地址<input class="nfo-text" id="toAddress">
+              数量<input class="nfo-text" id="usetAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="emergencyWithdrawToken">提取剩余代币</button>
+              代币地址<input class="nfo-text" id="toTokenAddress">
+              代币数量<input class="nfo-text" id="tokenAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setTOKEN">设置代币地址</button>
+              代币地址<input class="nfo-text" id="tokenAddress">
+              <hr>
+              
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="connectButton" disabled></button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getAccounts">eth_accounts</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_addEthereumChain">为钱包添加网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_switchEthereumChain">请求钱包切换网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_requestPermissions">请求连接钱包</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_getPermissions">获取(列出)权限</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="eth_accounts">获取地址</button>
+              <p class="info-text alert alert-secondary">eth_accounts result: <span id="getAccountsResult"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Part 1 -->
+  </main>
+
+  <script src="metamask-onboarding.bundle.js" defer></script>
+  <script src="web3.min.js" defer></script>
+  <script src="metamask.web3.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="raisingAbi.js" defer></script>
+  <script src="erc20Abi.js" defer></script>
+  <script src="contractRaising.js" defer></script>
+  
+</body>
+
+</html>
