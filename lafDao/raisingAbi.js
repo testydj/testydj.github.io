@@ -458,6 +458,19 @@ raisingABI = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "proportion",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -478,12 +491,25 @@ raisingABI = [
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "_proportion",
+          "type": "uint256"
+        }
+      ],
+      "name": "setProportion",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "_token",
           "type": "address"
         }
       ],
-      "name": "setTOKEN",
+      "name": "setToken",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -623,6 +649,25 @@ raisingABI = [
           "internalType": "uint8",
           "name": "participatingIndex",
           "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "whiteAmountOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",

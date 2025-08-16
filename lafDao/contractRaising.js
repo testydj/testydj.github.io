@@ -325,13 +325,23 @@ $('#divieToken').on('click', function() {
 
 
 //设置代币地址
-$('#setTOKEN').on('click', function() {
-  console.log('>>>','setTOKEN');
+$('#setToken').on('click', function() {
+  console.log('>>>','setToken');
   var tokenAddress = $("#tokenAddress").val();
-  raisingContract.methods.setTOKEN(tokenAddress).send({from: accounts}, function (error, transactionHash) {
-    console.log("setTOKEN>>>>>", error, transactionHash);
+  raisingContract.methods.setToken(tokenAddress).send({from: accounts}, function (error, transactionHash) {
+    console.log("setToken>>>>>", error, transactionHash);
   });
 })
+
+//设置白名单比例
+$('#setProportion').on('click', function() {
+  console.log('>>>','setProportion');
+  var proportion = $("#proportion").val();
+  raisingContract.methods.setProportion(web3.utils.toWei(proportion, "ether")).send({from: accounts}, function (error, transactionHash) {
+    console.log("setToken>>>>>", error, transactionHash);
+  });
+})
+
 
 
 //提取剩余usdt
