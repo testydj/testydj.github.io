@@ -205,6 +205,8 @@ let participatingAmount = [100,200,300];
   
 ///-------
   //最大募集
+const loadContractData = () => {
+
   raisingContract.methods.totalSupplyMax().call(null, function (error, data) {
     console.log(data);
     $('#totalSupplyMax').html(web3.utils.fromWei(data, "ether"))
@@ -216,7 +218,7 @@ let participatingAmount = [100,200,300];
     $('#totalSupply').html(web3.utils.fromWei(data, "ether"))
   });
   
-  console.log("accounts>>>>", accounts);
+
   //私募额
   raisingContract.methods.participatingAccountAmount(accounts).call(null, function (error, data) {
     console.log(data);
@@ -273,7 +275,7 @@ let participatingAmount = [100,200,300];
     console.log(data);
     $('#getReferrals').html(data)
   });
-
+}
 
   //绑定邀请人
 $('#setReferrer').on('click', async function() {
@@ -385,6 +387,7 @@ const getAccounts = async () => {
         
         // 这里可以调用其他需要账户地址的函数
         // updateContractData();
+        loadContractData();
         
     } catch (error) {
         console.error("获取账户失败:", error);
