@@ -227,6 +227,15 @@ const loadContractData = () => {
 
 
 
+  //团队募集
+  raisingContract.methods.teamTotalParticipationValue(accounts).call(null, function (error, data) {
+    console.log(data);
+    $('#teamTotalParticipationValue').html(web3.utils.fromWei(data, "ether"))
+  });
+  
+
+
+
   //代币余额
   raisingContract.methods.balanceOf(accounts).call(null, function (error, data) {
     console.log(data);
