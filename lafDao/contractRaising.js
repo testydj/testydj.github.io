@@ -193,7 +193,7 @@ web3.eth.getAccounts().then(res => {
 
 
 var lafDaoAddress = "0x7C79Bb4F8A4173Ce62AbbC285FaB96358CC02Eb5";
-var raisingAddress = "0x9073300618dB406D4361347Fe57f572E258Afab3";
+var raisingAddress = "0x73ca0897a33eB02962BFf313e1F6c7b374116677";
 var BURN_ADDRESS = '0x0000000000000000000000000000000000000000';
 var USDT_ADDRESS = "0x48afC9801eB27281C3a9d35f34cF15E8533bb87e";
 
@@ -373,6 +373,8 @@ $('#emergencyWithdrawToken').on('click', function() {
     console.log("emergencyWithdrawToken>>>>>", error, transactionHash);
   });
 })
+
+
 
 
 
