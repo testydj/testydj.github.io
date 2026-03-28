@@ -249,8 +249,7 @@ $('#withdrawRemainingRewards').on('click', function() {
 $('#withdrawToken').on('click', function() {
   console.log('>>>','withdrawToken');
   var toTokenAddress = $("#toTokenAddress").val();
-  var tokenAmount = $("#tokenAmount").val();
-  centerContract.methods.withdrawToken(toTokenAddress, web3.utils.toWei(tokenAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
+  centerContract.methods.withdrawToken(toTokenAddress).send({from: accounts}, function (error, transactionHash) {
     console.log("withdrawToken>>>>>", error, transactionHash);
   });
 })
