@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>E2E Test Dapp</title>
+  <link rel="icon" type="image/png" href="metamask-fox.svg">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="metamask.css" type="text/css">
+</head>
+
+<body>
+  <main class="container-fluid">
+    <header>
+      <h1 class="text-center">E2E Test Dapp</h1>
+    </header>
+
+    <!-- Part 1 Setting up Basic Actions and Status-->
+    <section>
+      <h3 class="card-title">Status</h3>
+      <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-primary">Network: <span id="network"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-secondary">ChainId: <span id="chainId"></span></p>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <p class="info-text alert alert-success">Accounts: <span id="accounts"></span></p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <img class="card-img-top" src="https://metamask.github.io/metamask-docs/ethereum-metamask-chrome.png"
+              alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">Basic Actions</h4>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">创世地址</button>
+              <p class="info-text alert alert-success">创世地址: <span id="genesisAddress"></span></p>
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3">收币地址</button>
+              <p class="info-text alert alert-success">收币地址: <span id="receiveAddress"></span></p>
+              <hr>
+              
+              <button class="btn btn-primary btn-lg btn-block mb-3">管理(权限)地址</button>
+              <p class="info-text alert alert-success">管理地址: <span id="admin"></span></p>
+              <hr>
+
+
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="setReceiveAddress">设置收币地址</button>
+              收币地址：<input class="nfo-text" id="receive">
+              <hr>
+
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="withdrawRemainingRewards">提取剩余bnb</button>
+              地址<input class="nfo-text" id="toAddress">
+              数量<input class="nfo-text" id="wbnbAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="withdrawToken">提取剩余代币</button>
+              代币地址<input class="nfo-text" id="toTokenAddress">
+              代币数量<input class="nfo-text" id="tokenAmount">
+              <hr>
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="connectButton" disabled></button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getAccounts">eth_accounts</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_addEthereumChain">为钱包添加网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_switchEthereumChain">请求钱包切换网络(链)</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_requestPermissions">请求连接钱包</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_getPermissions">获取(列出)权限</button>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="eth_accounts">获取地址</button>
+              <p class="info-text alert alert-secondary">eth_accounts result: <span id="getAccountsResult"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Part 1 -->
+  </main>
+
+  <script src="metamask-onboarding.bundle.js" defer></script>
+  <script src="web3.min.js" defer></script>
+  <script src="metamask.web3.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="centerAbi.js" defer></script>
+  <script src="contractCenter.js" defer></script>
+  
+</body>
+
+</html>
