@@ -192,7 +192,7 @@ web3.eth.getAccounts().then(res => {
 
 
 
-var centerAddress = "0x0f164fd661059F75616bdA862281E32a4029af1f";
+var centerAddress = "0xc28006cDf47684949d18877b8237278F84640420";
 var BURN_ADDRESS = '0x0000000000000000000000000000000000000000';
 var WBNB_ADDRESS = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 let centerContract = new web3.eth.Contract(centerAbi, centerAddress);
@@ -251,6 +251,31 @@ $('#withdrawToken').on('click', function() {
   var toTokenAddress = $("#toTokenAddress").val();
   centerContract.methods.withdrawToken(toTokenAddress).send({from: accounts}, function (error, transactionHash) {
     console.log("withdrawToken>>>>>", error, transactionHash);
+  });
+})
+
+$('#getUserReferralCount').on('click', function() {
+  console.log('>>>','getUserReferralCount');
+  var agentAddress = $("#agentAddress").val();
+  centerContract.methods.getUserReferralCount(agentAddress).call(null, function (error, data) {
+    console.log(centerContract);
+    $('#userReferralCount').html(data)
+  });
+
+})
+
+$('#batchValidate').on('click', function() {
+  console.log('>>>','batchValidate');
+  var batchAddressArray = $("#batchAddressArray").val();
+  
+  var jsonStr = batchAddressArray.replace(/(0x[a-fA-F0-9]{40})/g, '"$1"');
+  console.log("jsonStr>>>", jsonStr)
+
+  // 解析成数组
+  var arr = JSON.parse(jsonStr);
+
+  centerContract.methods.batchValidate(arr).send({from: accounts}, function (error, transactionHash) {
+    console.log("batchValidate>>>>>", error, transactionHash);
   });
 })
 

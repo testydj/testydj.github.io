@@ -71,6 +71,15 @@
               代币地址<input class="nfo-text" id="toTokenAddress">
               <hr>
 
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="getUserReferralCount">查看地址邀请数</button>
+              <p class="info-text alert alert-success">邀请数: <span id="userReferralCount"></span></p>
+              <hr>
+
+
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="batchValidate">调整添加有效数</button>
+              添加有效数的地址数组["xxx","xxxx"]<input class="nfo-text" id="batchAddressArray">
+              <hr>
+
               <button class="btn btn-primary btn-lg btn-block mb-3" id="connectButton" disabled></button>
               <button class="btn btn-primary btn-lg btn-block mb-3" id="getAccounts">eth_accounts</button>
               <button class="btn btn-primary btn-lg btn-block mb-3" id="wallet_addEthereumChain">为钱包添加网络(链)</button>
