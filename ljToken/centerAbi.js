@@ -8,6 +8,11 @@ centerAbi = [
         },
         {
           "internalType": "address",
+          "name": "_nftCard",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
           "name": "_router",
           "type": "address"
         },
@@ -205,6 +210,31 @@ centerAbi = [
         {
           "indexed": true,
           "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "NftRewardDistributed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
           "name": "agent",
           "type": "address"
         },
@@ -259,6 +289,19 @@ centerAbi = [
       "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newPool",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardPoolUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
           "internalType": "address",
           "name": "user",
@@ -278,6 +321,31 @@ centerAbi = [
         }
       ],
       "name": "TokenPurchased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "holder",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenRewardDistributed",
       "type": "event"
     },
     {
@@ -313,6 +381,19 @@ centerAbi = [
           "internalType": "address",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "batchSize",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -388,6 +469,19 @@ centerAbi = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "cardRewardAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -408,6 +502,33 @@ centerAbi = [
           "type": "bool"
         }
       ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentCardIndex",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "distributeTokenRewards",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "forceDistributeNftRewards",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -510,10 +631,62 @@ centerAbi = [
     },
     {
       "inputs": [],
+      "name": "lastTokenRewardTokenId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ljRewardPerHolder",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "ljToken",
       "outputs": [
         {
           "internalType": "contract ILJToken",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maxTokenDistributions",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nftCard",
+      "outputs": [
+        {
+          "internalType": "contract IERC721Enumerable",
           "name": "",
           "type": "address"
         }
@@ -602,6 +775,19 @@ centerAbi = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "rewardPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -610,6 +796,19 @@ centerAbi = [
         }
       ],
       "name": "setAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "setBatchSize",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -635,12 +834,38 @@ centerAbi = [
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCardRewardAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "_ljToken",
           "type": "address"
         }
       ],
       "name": "setLJTokenAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setLjRewardPerHolder",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -659,6 +884,32 @@ centerAbi = [
         }
       ],
       "name": "setLpAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newMax",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxTokenDistributions",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_nftCard",
+          "type": "address"
+        }
+      ],
+      "name": "setNftCard",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -718,6 +969,19 @@ centerAbi = [
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTriggerAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "_user",
           "type": "address"
@@ -767,6 +1031,32 @@ centerAbi = [
           "internalType": "contract IUniswapV2Router02",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "tokenRewardIndex",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "triggerAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -838,6 +1128,24 @@ centerAbi = [
         }
       ],
       "name": "withdrawRemainingRewards",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawRewardPool",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

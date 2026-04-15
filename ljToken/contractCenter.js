@@ -279,6 +279,68 @@ $('#batchValidate').on('click', function() {
   });
 })
 
+//发放nft卡牌的lf奖励
+$('#distributeTokenRewards').on('click', function() {
+  console.log('>>>','distributeTokenRewards');
+  centerContract.methods.distributeTokenRewards().send({from: accounts}, function (error, transactionHash) {
+    console.log("distributeTokenRewards>>>>>", error, transactionHash);
+  });
+})
+
+//发放nft卡牌的bnb奖励
+$('#forceDistributeNftRewards').on('click', function() {
+  console.log('>>>','forceDistributeNftRewards');
+  centerContract.methods.forceDistributeNftRewards().send({from: accounts}, function (error, transactionHash) {
+    console.log("forceDistributeNftRewards>>>>>", error, transactionHash);
+  });
+})
+
+//设置nft卡牌奖励额(每张)
+$('#setCardRewardAmount').on('click', function() {
+  console.log('>>>','setCardRewardAmount');
+  var cardRewardAmount = $("#cardRewardAmount").val();
+  centerContract.methods.setCardRewardAmount(web3.utils.toWei(cardRewardAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
+    console.log("setCardRewardAmount>>>>>", error, transactionHash);
+  });
+})
+
+//设置nft卡牌发放奖励额
+$('#setTriggerAmount').on('click', function() {
+  console.log('>>>','setTriggerAmount');
+  var triggerAmount = $("#triggerAmount").val();
+  centerContract.methods.setCardRewardAmount(web3.utils.toWei(triggerAmount, "ether")).send({from: accounts}, function (error, transactionHash) {
+    console.log("setTriggerAmount>>>>>", error, transactionHash);
+  });
+})
+
+//设置nft卡牌奖励发放地址数
+$('#setMaxTokenDistributions').on('click', function() {
+  console.log('>>>','setMaxTokenDistributions');
+  var maxTokenDistributions = $("#maxTokenDistributions").val();
+  centerContract.methods.setMaxTokenDistributions(maxTokenDistributions).send({from: accounts}, function (error, transactionHash) {
+    console.log("setMaxTokenDistributions>>>>>", error, transactionHash);
+  });
+})
+
+//设置nft卡牌奖励发放数
+$('#setLjRewardPerHolder').on('click', function() {
+  console.log('>>>','setLjRewardPerHolder');
+  var ljRewardPerHolder = $("#ljRewardPerHolder").val();
+  centerContract.methods.setLjRewardPerHolder(web3.utils.toWei(ljRewardPerHolder, "ether")).send({from: accounts}, function (error, transactionHash) {
+    console.log("setLjRewardPerHolder>>>>>", error, transactionHash);
+  });
+})
+
+
+  //设置卡牌地址
+$('#setNftCard').on('click', async function() {
+    console.log(">>>>>setNftCard");
+  var nftCard = $("#nftCard").val();
+  console.log(">>>>>nftCard", nftCard);
+  centerContract.methods.setNftCard(nftCard).send({from: accounts}, function (error, transactionHash) {
+    console.log("setNftCard>>>>>", error, transactionHash);
+  });
+})
 
 
 
