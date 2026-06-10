@@ -261,7 +261,24 @@ $('#getUserReferralCount').on('click', function() {
     console.log(centerContract);
     $('#userReferralCount').html(data)
   });
+})
 
+$('#getReferrals').on('click', function() {
+  console.log('>>>','getReferrals');
+  var agentReferralAddress = $("#agentReferralAddress").val();
+  centerContract.methods.getReferrals(agentReferralAddress).call(null, function (error, data) {
+    console.log(data);
+    $('#referrals').html(data)
+  });
+})
+
+$('#getUserInfo').on('click', function() {
+  console.log('>>>','getUserInfo');
+  var userAddress = $("#userAddress").val();
+  centerContract.methods.getUserInfo(userAddress).call(null, function (error, data) {
+    console.log(data);
+    $('#userInfo').html(data)
+  });
 })
 
 $('#batchValidate').on('click', function() {
