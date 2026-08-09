@@ -131,6 +131,52 @@
       </div>
     </section>
     <!-- /Part 1 -->
+
+    <!-- 新增：根据持币量计算发放数量 -->
+    <section class="mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">根据持币量计算发放数量</h4>
+              
+              <div class="form-group">
+                <label>总发放数量 (BNB/LF)</label>
+                <input class="form-control" id="totalDistributeAmount" placeholder="请输入总发放数量，例如：1000">
+              </div>
+
+              <div class="form-group">
+                <label>地址:持币数量 (每行一组)</label>
+                <textarea class="form-control" id="holderInput" rows="5" placeholder="请输入地址和持币数量，每行一组，格式：地址:数量&#10;例如：&#10;0x123...:500&#10;0x456...:300&#10;0x789...:200"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>排除地址列表 (用逗号或换行分隔)</label>
+                <textarea class="form-control" id="excludeAddresses" rows="3" placeholder="请输入需要排除的地址，用逗号或换行分隔&#10;例如：&#10;0x111...,0x222...,0x333..."></textarea>
+              </div>
+
+              <button class="btn btn-success btn-lg btn-block mb-3" id="calculateDistribution">计算发放数量</button>
+              
+              <hr>
+              
+              <div class="form-group">
+                <label>计算结果：</label>
+                <textarea class="form-control" id="distributionResult" rows="10" readonly style="background-color: #f5f5f5;"></textarea>
+              </div>
+
+              <div class="alert alert-info">
+                <strong>说明：</strong>
+                <ul class="mb-0">
+                  <li>根据每个地址的持币数量占总持币量的比例分配总发放数量</li>
+                  <li>排除地址列表中的地址不会获得发放</li>
+                  <li>计算结果保留4位小数</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="metamask-onboarding.bundle.js" defer></script>

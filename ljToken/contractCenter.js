@@ -359,7 +359,167 @@ $('#setNftCard').on('click', async function() {
   });
 })
 
+// 根据持币量计算发放数量
+$('#calculateDistribution').on('click', function() {
+    console.log('>>>', 'calculateDistribution');
+    
+    // 1. 获取总发放数量
+    const totalAmount = parseFloat($("#totalDistributeAmount").val().trim());
+    if (isNaN(totalAmount) || totalAmount <= 0) {
+        alert('请输入有效的总发放数量！');
+        return;
+    }
 
+    // 2. 获取持币地址列表
+    const holderText = $("#holderInput").val().trim();
+    if (!holderText) {
+        alert('请输入地址和持币数量！');
+        return;
+    }
+
+    // 解析地址和持币数量
+    const holderLines = holderText.split('\n').filter(line => line.trim() !== '');
+    const holderMap = {};
+    let totalHoldings = 0;
+
+    for (const line of holderLines) {
+        const parts = line.split(':');
+        if (parts.length === 2) {
+            const address = parts[0].trim();
+            const amount = parseFloat(parts[1].trim());
+            if (address && !isNaN(amount) && amount > 0) {
+                // 验证地址格式
+                if (/^0x[a-fA-F0-9]{40}$/.test(address)) {
+                    holderMap[address] = amount;
+                    totalHoldings += amount;
+                } else {
+                    console.warn('无效地址格式:', address);
+                }
+            }
+        }
+    }
+
+    if (Object.keys(holderMap).length === 0) {
+        alert('未找到有效的地址和持币数据！请确保格式为：地址:数量');
+        return;
+    }
+
+    if (totalHoldings <= 0) {
+        alert('总持币量必须大于0！');
+        return;
+    }
+
+    // 3. 获取排除地址列表
+    const excludeText = $("#excludeAddresses").val().trim();
+    const excludeSet = new Set();
+    if (excludeText) {
+        // 支持逗号和换行分隔
+        const excludeList = excludeText.split(/[,，\n]/).map(s => s.trim()).filter(s => s !== '');
+        for (const addr of excludeList) {
+            if (/^0x[a-fA-F0-9]{40}$/.test(addr)) {
+                excludeSet.add(addr);
+            }
+        }
+    }
+
+    // 4. 【修改】先计算排除地址的持币总量，然后从总持币量中扣除
+    let excludedHoldings = 0;
+    const excludedAddresses = [];
+    
+    // 先遍历一遍，计算排除地址的总持币量
+    for (const [address, holdings] of Object.entries(holderMap)) {
+        if (excludeSet.has(address)) {
+            excludedHoldings += holdings;
+            excludedAddresses.push({
+                address: address,
+                holdings: holdings
+            });
+        }
+    }
+
+    // 实际参与分配的总持币量 = 总持币量 - 排除地址的持币量
+    const effectiveTotalHoldings = totalHoldings - excludedHoldings;
+
+    if (effectiveTotalHoldings <= 0) {
+        alert('排除所有地址后，没有有效的持币地址可以参与分配！');
+        return;
+    }
+
+    // 5. 计算每个地址的发放数量（基于有效总持币量）
+    const results = [];
+    let distributedTotal = 0;
+
+    for (const [address, holdings] of Object.entries(holderMap)) {
+        // 检查是否在排除列表中
+        if (excludeSet.has(address)) {
+            continue; // 跳过排除地址，不参与分配
+        }
+
+        // 【修改】计算分配数量： (持币量 / 有效总持币量) * 总发放数量
+        const ratio = holdings / effectiveTotalHoldings;
+        const distributeAmount = ratio * totalAmount;
+        const roundedAmount = Math.round(distributeAmount * 10000) / 10000; // 保留4位小数
+
+        results.push({
+            address: address,
+            holdings: holdings,
+            ratio: (ratio * 100).toFixed(2) + '%',
+            amount: roundedAmount
+        });
+
+        distributedTotal += roundedAmount;
+    }
+
+    // 6. 显示结果
+    let resultText = '===== 发放计算结果 =====\n\n';
+    resultText += `总发放数量: ${totalAmount}\n`;
+    resultText += `总持币量: ${totalHoldings}\n`;
+    resultText += `排除地址持币量: ${excludedHoldings}\n`;
+    resultText += `有效总持币量: ${effectiveTotalHoldings}\n`;
+    resultText += `实际参与地址数: ${results.length}\n`;
+    resultText += `排除地址数: ${excludedAddresses.length}\n`;
+    resultText += `实际发放总量: ${distributedTotal.toFixed(4)}\n`;
+    resultText += `（四舍五入误差: ${(totalAmount - distributedTotal).toFixed(4)}）\n\n`;
+    
+    resultText += '--- 发放明细 ---\n';
+    resultText += '地址\t发放数量\t占比\t持币量\n';
+    resultText += '-'.repeat(60) + '\n';
+
+    // 按发放数量从高到低排序
+    results.sort((a, b) => b.amount - a.amount);
+
+    for (const r of results) {
+        resultText += `${r.address}\t${r.amount.toFixed(4)}\t${r.ratio}\t${r.holdings}\n`;
+    }
+
+    if (excludedAddresses.length > 0) {
+        resultText += '\n--- 排除地址 (不参与分配) ---\n';
+        resultText += '地址\t持币量\n';
+        resultText += '-'.repeat(60) + '\n';
+        for (const item of excludedAddresses) {
+            resultText += `${item.address}\t${item.holdings}\n`;
+        }
+    }
+
+    // 显示结果
+    $("#distributionResult").val(resultText);
+
+    // 同时输出到控制台
+    console.log('计算结果:', {
+        totalAmount,
+        totalHoldings,
+        excludedHoldings,
+        effectiveTotalHoldings,
+        participatingAddresses: results.length,
+        excludedAddresses: excludedAddresses.length,
+        distributedTotal: distributedTotal.toFixed(4),
+        results: results,
+        excludedDetails: excludedAddresses
+    });
+
+    // 6. 显示汇总信息弹窗
+    alert(`计算完成！\n\n参与地址: ${results.length}个\n排除地址: ${excludedAddresses.length}个\n排除地址持币量: ${excludedHoldings}\n有效总持币量: ${effectiveTotalHoldings}\n实际发放总量: ${distributedTotal.toFixed(4)}\n请查看下方结果区域详情。`);
+});
 
 const initialize = async () => {
 
