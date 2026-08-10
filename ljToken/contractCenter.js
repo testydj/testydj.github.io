@@ -495,14 +495,14 @@ $('#calculateDistribution').on('click', function() {
         // 排除地址（不参与分配）
         for (const item of excludedAddresses) {
             const ratio = totalHoldings > 0 ? (item.holdings / totalHoldings * 100).toFixed(2) + '%' : 'N/A';
-            results.push({
-                address: item.address,
-                holdings: item.holdings,
-                ratio: ratio,
-                amount: 0,
-                isExcluded: true,
-                note: '不参与分配'
-            });
+            // results.push({
+            //     address: item.address,
+            //     holdings: item.holdings,
+            //     ratio: ratio,
+            //     amount: 0,
+            //     isExcluded: true,
+            //     note: '不参与分配'
+            // });
         }
 
         // 显示结果
@@ -529,7 +529,7 @@ $('#calculateDistribution').on('click', function() {
 
         for (const r of results) {
             const amountStr = r.isExcluded ? '0' : r.amount.toFixed(4);
-            resultText += `${r.address}\t${amountStr}\t${r.note}\n`;
+            resultText += `${r.address},${amountStr}\n`;
         }
 
         // 显示结果
@@ -606,14 +606,14 @@ $('#calculateDistribution').on('click', function() {
         // 添加排除地址（不参与分配）
         for (const item of excludedAddresses) {
             const ratio = totalHoldings > 0 ? (item.holdings / totalHoldings * 100).toFixed(2) + '%' : 'N/A';
-            results.push({
-                address: item.address,
-                holdings: item.holdings,
-                ratio: ratio,
-                amount: 0,
-                isExcluded: true,
-                note: '不参与分配'
-            });
+            // results.push({
+            //     address: item.address,
+            //     holdings: item.holdings,
+            //     ratio: ratio,
+            //     amount: 0,
+            //     isExcluded: true,
+            //     note: '不参与分配'
+            // });
         }
 
         // 显示结果
@@ -641,7 +641,7 @@ $('#calculateDistribution').on('click', function() {
 
         for (const r of results) {
             const amountStr = r.isExcluded ? '0' : r.amount.toFixed(4);
-            resultText += `${r.address}\t${amountStr}\t${r.ratio}\t${r.holdings}\t${r.note}\n`;
+            resultText += `${r.address},${amountStr}\n`;
         }
 
         $("#distributionResult").val(resultText);
@@ -666,6 +666,7 @@ $('#calculateDistribution').on('click', function() {
               `请查看下方结果区域详情。`);
     }
 });
+
 
 const initialize = async () => {
 
