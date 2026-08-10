@@ -146,6 +146,14 @@
               </div>
 
               <div class="form-group">
+                <label>分配模式</label>
+                <select class="form-control" id="distributionMode">
+                  <option value="weighted">排除地址不参与分配（按权重分配）</option>
+                  <option value="equal">排除地址不参与分配（剩余地址平分）</option>
+                </select>
+              </div>
+
+              <div class="form-group">
                 <label>地址:持币数量 (每行一组)</label>
                 <textarea class="form-control" id="holderInput" rows="5" placeholder="请输入地址和持币数量，每行一组，格式：地址:数量&#10;例如：&#10;0x123...:500&#10;0x456...:300&#10;0x789...:200"></textarea>
               </div>
